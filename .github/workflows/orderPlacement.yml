@@ -36,14 +36,16 @@ jobs:
         run: npm install
 
       - name: List test files
-        run: ls tests  # List files in the tests directory for debugging
+        run: ls tests  
 
       - name: Run tests
         run: |
           if [ "${{ github.event.inputs.module }}" == "all" ]; then
-            npx jest --coverage;  # Run all tests with coverage
+            echo "Running all tests with coverage..."
+            npx jest --coverage  # Run all tests with coverage
           else
-            npx jest "tests/${{ github.event.inputs.module }}.test.js" --coverage;  # Run specific module tests
+            echo "Running tests for module: ${{ github.event.inputs.module }}..."
+            npx jest "tests/${{ github.event.inputs.module }}.test.js" --coverage  # Run specific module tests
           fi
 
       - name: Upload Coverage Report
