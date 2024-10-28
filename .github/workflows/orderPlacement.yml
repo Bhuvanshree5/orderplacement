@@ -45,7 +45,7 @@ jobs:
             npx jest --coverage  # Run all tests with coverage
           else
             echo "Running tests for module: ${{ github.event.inputs.module }}..."
-            npx jest "tests/${{ github.event.inputs.module }}.test.js" --coverage  # Run specific module tests
+            npx jest "tests/**/${{ github.event.inputs.module }}.test.js" --coverage  # Run specific module tests
           fi
 
       - name: Upload Coverage Report
