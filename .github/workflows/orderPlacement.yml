@@ -1,19 +1,29 @@
-name : orderplacement ci
+name: Order Placement CI
 
 on:
   push:
-    branches: master
+    branches: 
+      - master
   pull_request:
-    branches: master
+    branches: 
+      - master
   workflow_dispatch:
-    options:
-       "users",
-       "orderPlacement",
-       "productsHistory"
+    inputs:
+      module:
+        description: 'Select the module to run tests for'
+        required: true
+        default: 'all'
+        type: choice
+        options: 
+          - all
+          - orderPlacement
+          - users
+          - productsHistory
+
 jobs:
   test:
     runs-on: ubuntu-latest
-     steps:
+    steps:
       - name: Check out repository
         uses: actions/checkout@v3
 
@@ -31,7 +41,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-     - name: Run tests
+      - name: Run tests
         run: |
           if [ "${{ github.event.inputs.module }}" == "all" ]; then
             jest --coverage;  # Run all tests with coverage
