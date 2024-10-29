@@ -12,7 +12,7 @@ on:
       module:
         description: 'Select the module to run tests for'
         required: true
-        default: 'all'
+        default: users
         type: choice
         options: 
           - all
