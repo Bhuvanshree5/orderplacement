@@ -26,9 +26,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
+
       - name: Install k6 
         run: |
-          sudo apt update
           sudo apt update
           sudo apt install -y snapd
           sudo snap install k6
@@ -41,17 +41,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: List test files
-        run: ls tests  
-
       - name: Run tests
         run: |
           if [ "${{ github.event.inputs.module }}" == "all" ]; then
             echo "Running all tests with coverage..."
-            npx jest --coverage  # Run all tests with coverage
+            npx jest --coverage
           else
             echo "Running tests for module: ${{ github.event.inputs.module }}..."
-            npx jest "tests/**/${{ github.event.inputs.module }}.test.js" --coverage  # Run specific module tests
+            npx jest "tests/${{ github.event.inputs.module }}/**/*.test.js" --coverage
           fi
 
       - name: Upload Coverage Report
