@@ -48,7 +48,7 @@ jobs:
             npx jest --coverage
           else
             echo "Running tests for module: ${{ github.event.inputs.module }}..."
-            npx jest "tests/${{ github.event.inputs.module }}/**/*.test.js" --coverage
+            npx jest "tests/**/${{ github.event.inputs.module }}.test.js" --coverage
           fi
 
       - name: Upload Coverage Report
